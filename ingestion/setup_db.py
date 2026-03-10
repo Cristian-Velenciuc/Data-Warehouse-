@@ -13,4 +13,4 @@ with connect("test_database") as conn:
 
     conn.commit()
 
-#CREATE TABLES IF THEY DONT EXIST YET
+
