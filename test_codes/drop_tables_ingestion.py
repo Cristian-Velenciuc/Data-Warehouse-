@@ -1,4 +1,8 @@
-from db_connection import connect
+import sys
+from pathlib import Path
+
+# add project root to Python path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 tables = [
     "cust_info",
@@ -9,6 +13,7 @@ tables = [
     "px_cat_g1v2"
 ]
 
+from base_codes import connect
 with connect("test_database") as conn:
     cur = conn.cursor()
 

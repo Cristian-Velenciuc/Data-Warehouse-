@@ -1,10 +1,14 @@
-from db_connection import connect
 import pandas as pd
 import os
+import sys
+from pathlib import Path
+# add project root to Python path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-export_folder = "C:/UM/Yr3/Data Engineering/Classwork/datasets/test_open"
+export_folder = "./data_source"
 os.makedirs(export_folder, exist_ok=True)
 
+from base_codes import connect
 with connect("test_database") as conn:
 
     tables = pd.read_sql("""

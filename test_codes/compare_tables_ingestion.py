@@ -1,9 +1,14 @@
-from db_connection import connect
 import pandas as pd
 import os
+import sys
+from pathlib import Path
 
-contents_folder = r"C:\UM\Yr3\Data Engineering\Classwork\datasets"
+# add project root to Python path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
+contents_folder = "./data_source"
+
+from base_codes import connect
 with connect("test_database") as conn:
 
     for root, dirs, files in os.walk(contents_folder):
@@ -24,9 +29,9 @@ with connect("test_database") as conn:
                 sql_df = sql_df.sort_values(by=list(sql_df.columns)).reset_index(drop=True)
 
                 if csv_df.equals(sql_df):
-                    print("✔ Data matches perfectly")
+                    print("Data matches perfectly")
                 else:
-                    print("✖ Data mismatch detected")
+                    print("Data mismatch detected")
 
                     # Find differences
                     diff = csv_df.compare(sql_df)
